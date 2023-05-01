@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "commonjs",
+
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon ./index.js"
@@ -19,9 +21,11 @@
   },
   "homepage": "https://github.com/Coldaniel2001/musSky-backend#readme",
   "dependencies": {
+    "cloudinary": "^1.36.2",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "express-fileupload": "^1.4.0",
     "helmet": "^6.1.5",
     "mongoose": "^7.0.5",
     "morgan": "^1.10.0",

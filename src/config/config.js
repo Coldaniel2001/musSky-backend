@@ -1,12 +1,14 @@
 const dotenv = require('dotenv')
 
+dotenv.config()
+
 const ENV = process.env.NODE_ENV || "development"
 
-if (ENV === "development") {
-    dotenv.config({ path: ".env.development" })
-} else {
-    dotenv.config({ path: ".env.production" })
-}
+// if (ENV === "development") {
+//     dotenv.config({ path: ".env.development" })
+// } else {
+//     dotenv.config({ path: ".env.production" })
+// }
 
 
 const CONFIG = {
@@ -19,12 +21,12 @@ const CONFIG = {
         }
     },
     production: {
-        app: {
-            PORT: process.env.PORT || 4006
-        },
-        db: {
-            URL: process.env.MONGO_URL
-        }
+        // app: {
+        //     PORT: process.env.PORT || 4006
+        // },
+        // db: {
+        //     URL: process.env.MONGO_URL
+        // }
     }
 }
 

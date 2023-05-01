@@ -1,11 +1,17 @@
 const express = require('express')
 const cors = require('cors')
+const fileUpload = require('express-fileupload')
+
 
 const usersRouters = require('./routes/users.routes')
 
 const app = express()
 app.use(cors())
 app.use(express.json())
+app.use(fileUpload({
+    useTempFiles : true,
+    tempFileDir : './tmp'
+}));
 
 app.use("/users", usersRouters)
 
