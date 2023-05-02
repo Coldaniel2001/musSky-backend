@@ -9,18 +9,25 @@ const getAllUsers = (req, res) => {
 }
 
 const createUsers = async (req, res) => {
-    try{
-        const user = await UserModel.findOne({email:req.body.email})
-        if(user){
+    const { name, nickname, picture, updated_at, email } = req.body
+    try {
+        const user = await UserModel.findOne({ email: email })
+        if (user) {
             return res.status(200).send({ status: 'False', msg: "This User Exist" })
         }
-        const newUser = new UserModel(req.body)
-        await newUser.save()
-        return  res.status(200).send({ status: 'OK', createUsers })
+        const newUser = await UserModel.create({
+            name,
+            nickname,
+            email,
+            picture,
+            updated_at
+        })
+        return res.status(200).send({ status: 'OK', createUsers })
 
-    }catch(error){
+    } catch (error) {
         res.status(500).send({ status: 'FALSE' })
     }
 }
+
 
 module.exports = { getAllUsers, createUsers }

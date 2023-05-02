@@ -16,6 +16,11 @@ const CONFIG = {
         },
         db: {
             URL: process.env.MONGO_URL
+        },
+        auth0:{
+            client_origin: process.env.APP_ORIGIN,
+            audience: process.env.AUTH0_AUDIENCE,
+            issuer: process.env.AUTH0_ISSUER,
         }
     },
     production: {
@@ -24,6 +29,11 @@ const CONFIG = {
         },
         db: {
             URL: process.env.MONGO_URL
+        },
+        auth0:{
+            client_origin: process.env.APP_ORIGIN,
+            audience: process.env.AUTH0_AUDIENCE,
+            issuer: process.env.AUTH0_ISSUER,
         }
     }
 }

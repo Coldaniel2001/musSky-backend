@@ -5,11 +5,7 @@ const userShema = Schema({
         type: String,
         required: true
     },
-    surname: {
-        type: String,
-        required: true
-    },
-    username: {
+    nickname: {
         type: String,
         required: true
     },
@@ -17,15 +13,14 @@ const userShema = Schema({
         type: String,
         required: true
     },
-    password: {
+    picture: {
         type: String,
         required: true
     },
-    passwordRepeat: {
+    updated_at: {
         type: String,
         required: true
-    }
-
+    },
 })
 
 const UserModel = model("Users", userShema)
