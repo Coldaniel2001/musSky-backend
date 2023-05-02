@@ -1,5 +1,6 @@
 const UserModel = require("../models/usersModels")
-// import { uploadImage } from "../utils/cloudinary"
+const { uploadImage, deleteImage } =require("../cloudinary/cloudinary")
+const fs =require("fs-extra")
 
 
 const getAllUsers = (req, res) => {
@@ -32,17 +33,20 @@ const createUsers = async (req, res) => {
 const editImage = async (req, res) => {
     const { userId } = req.body;
     try {
-        const user = await user.findOne({ _id: userId });
+        const user = await UserModel.findOne({ _id: userId });
         const resultToUpload = await uploadImage(req.files.file.tempFilePath);
-        const { public_id, secure_url } = resultToUpload;
-        const imgToDelete = user.img.public_id;
+        // const { public_id, secure_url } = resultToUpload;
+        const { secure_url } = resultToUpload;
+        console.log(secure_url)
+        // const imgToDelete = user.img.public_id;
 
-        user.img.public_id = public_id;
-        user.img.secure_url = secure_url;
+        user.picture = secure_url
+        // user.img.public_id = public_id;
+        // user.img.secure_url = secure_url;
 
-        if (imgToDelete) {
-            await deleteImage(imgToDelete);
-        }
+        // if (imgToDelete) {
+        //     await deleteImage(imgToDelete);
+        // }
 
         await user.save();
 
@@ -50,7 +54,7 @@ const editImage = async (req, res) => {
 
         return res.status(200).json({
             ok: true,
-            img: user.img.secure_url,
+            img: secure_url,
         });
     } catch (error) {
         console.log(error);
