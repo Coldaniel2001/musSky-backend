@@ -1,19 +1,23 @@
 const { Schema, model } = require("mongoose")
 
-const userSchema = Schema({
-    name: {
+const tracksSchema = Schema({
+    nameArtist: [{
+        type: Schema.Types.ObjectId,
+        ref: "Users",
+    }],
+    nameSong: {
         type: String,
-        required: true
-    },
-    nickname: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        required: true
+        required: true        
     },
     picture: {
+        type: String,
+        required: true
+    },
+    song: {
+        type: String,
+        required: true
+    },
+    genres: {
         type: String,
         required: true
     },
@@ -21,12 +25,13 @@ const userSchema = Schema({
         type: String,
         required: true
     },
-    rol: {
-        type: String,
+    liked: {
+        type: Boolean,
         required: true
-    }
+    },
+    
 })
 
-const UserModel = model("Users", userSchema)
+const TracksModel = model("Tracks", tracksSchema)
 
-module.exports = UserModel
+module.exports = TracksModel
