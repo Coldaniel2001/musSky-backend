@@ -19,11 +19,8 @@ const createUsers = async (req, res) => {
         }
         const newUser = new UserModel(req.body)
 
-        // if(req.files?.image){
-        //     const result = await uploadImage(req.files.image.tempFilePath)
-        // }
         await newUser.save()
-        return  res.status(200).send({ status: 'OK', createUsers })
+        return  res.status(200).send({ status: 'OK', newUser })
 
     }catch(error){
         res.status(500).send({ status: 'FALSE' })
@@ -34,10 +31,11 @@ const editImage = async (req, res) => {
     const { userId } = req.body;
     try {
         const user = await UserModel.findOne({ _id: userId });
+        console.log(user)
         const resultToUpload = await uploadImage(req.files.file.tempFilePath);
         // const { public_id, secure_url } = resultToUpload;
         const { secure_url } = resultToUpload;
-        console.log(secure_url)
+        // console.log(public_id)
         // const imgToDelete = user.img.public_id;
 
         user.picture = secure_url
