@@ -1,10 +1,14 @@
 const { Schema, model } = require("mongoose")
 
 const tracksSchema = Schema({
-    nameArtist: [{
-        type: Schema.Types.ObjectId,
-        ref: "Users",
-    }],
+    // nameArtist: [{
+    //     type: Schema.Types.ObjectId,
+    //     ref: "Users",
+    // }],
+     nameArtist: {
+        type: String,
+        required:true
+    },
     nameSong: {
         type: String,
         required: true        
@@ -17,19 +21,10 @@ const tracksSchema = Schema({
         type: String,
         required: true
     },
-    genres: {
+    genre: {
         type: String,
         required: true
-    },
-    updated_at: {
-        type: String,
-        required: true
-    },
-    liked: {
-        type: Boolean,
-        required: true
-    },
-    
+    }
 })
 
 const TracksModel = model("Tracks", tracksSchema)
