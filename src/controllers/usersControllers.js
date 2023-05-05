@@ -3,26 +3,44 @@ const { uploadImage, deleteImage } =require("../cloudinary/cloudinary")
 const fs =require("fs-extra")
 
 
-const getAllUsers = (req, res) => {
+const getAllUsers = async (req, res) => {
     try {
-        res.status(200).send({ status: 'OK' })
+        const allUsers = await UserModel.find({})
+        res.status(200).send({ status: 'OK', allUsers })
+    } catch (error) {
+        res.status(500).send({ status: 'FALSE' })
+    }
+}
+
+const getUser = async (req, res) => {
+    const {userId}= req.params
+    try {
+        const user = await UserModel.findOne({email:userId})
+        res.status(200).send({ status: 'OK', user })
     } catch (error) {
         res.status(500).send({ status: 'FALSE' })
     }
 }
 
 const createUsers = async (req, res) => {
-    try{
-        const user = await UserModel.findOne({email:req.body.email})
-        if(user){
+    const { name, nickname, picture, updated_at, email, rol, liked } = req.body
+    try {
+        const user = await UserModel.findOne({ email: email })
+        if (user) {
             return res.status(200).send({ status: 'False', msg: "This User Exist" })
         }
-        const newUser = new UserModel(req.body)
+        const newUser = await UserModel.create({
+            name,
+            nickname,
+            email,
+            picture,
+            updated_at,
+            rol,
+            liked
+        })
+        return res.status(200).send({ status: 'OK', createUsers })
 
-        await newUser.save()
-        return  res.status(200).send({ status: 'OK', newUser })
-
-    }catch(error){
+    } catch (error) {
         res.status(500).send({ status: 'FALSE' })
     }
 }
@@ -73,4 +91,4 @@ const getUserByEmail = async (req, res) => {
     }
 }
 
-module.exports = { getAllUsers, createUsers, editImage, getUserByEmail }
+module.exports = { getAllUsers, createUsers, editImage, getUserByEmail, getUser }
