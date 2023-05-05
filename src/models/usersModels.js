@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose")
 
-const userShema = Schema({
+const userSchema = Schema({
     name: {
         type: String,
         required: true
@@ -21,8 +21,16 @@ const userShema = Schema({
         type: String,
         required: true
     },
+    rol: {
+        type: String,
+        required: true
+    },
+    liked: [{
+        type: Schema.Types.ObjectId,
+        ref: "Tracks",
+    }]
 })
 
-const UserModel = model("Users", userShema)
+const UserModel = model("Users", userSchema)
 
 module.exports = UserModel
