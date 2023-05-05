@@ -16,4 +16,4 @@ router.get("/:userId", getUser)
 router.post("/",createUsers)
 
 
-module.exports = router;                        
+module.exports = router;

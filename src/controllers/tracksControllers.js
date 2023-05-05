@@ -10,6 +10,16 @@ const getAllTracks = async (req, res) => {
     }
 }
 
+const getToLikesTracks = async (req, res) => {
+    try {
+        const allSong = await TracksModel.find({})
+        res.status(200).send({ status: 'OK', allSong })
+    } catch (error) {
+        res.status(500).send({ status: 'FALSE' })
+    }
+}
+
+
 const addToLike = async (req, res) => {
     const { liked } = req.body
     const { userId } = req.params
@@ -32,4 +42,5 @@ const addToLike = async (req, res) => {
     }
 }
 
-module.exports = { getAllTracks, addToLike }
+
+module.exports = { getAllTracks, addToLike, getToLikesTracks }
