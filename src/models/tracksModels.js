@@ -24,6 +24,10 @@ const tracksSchema = Schema({
     genre: {
         type: String,
         required: true
+    },
+    update_at: {
+        type: String,
+        required: true
     }
 })
 

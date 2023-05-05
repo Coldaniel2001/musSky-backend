@@ -15,6 +15,6 @@ router.get("/", getAllUsers)
 router.get("/:userId", getUser)
 router.post("/",createUsers)
 router.post("/image", editImage)
-router.get("/:email", getUserByEmail)
+router.get("/getuser/:email", getUserByEmail)
 
 module.exports = router;                        

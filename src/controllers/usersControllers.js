@@ -47,10 +47,12 @@ const createUsers = async (req, res) => {
 
 const editImage = async (req, res) => {
     const { userId } = req.body;
+    console.log(userId)
     try {
         const user = await UserModel.findOne({ _id: userId });
         console.log(user)
         const resultToUpload = await uploadImage(req.files.file.tempFilePath);
+        console.log(resultToUpload)
         // const { public_id, secure_url } = resultToUpload;
         const { secure_url } = resultToUpload;
         // console.log(public_id)
@@ -84,7 +86,7 @@ const editImage = async (req, res) => {
 const getUserByEmail = async (req, res) => {
     const { email } = req.params
     try {
-        const user = await UserModel.findOne({email})
+        const user = await UserModel.findOne({email:email})
         return res.status(200).json({ ok: true, user })
     } catch (error) {
         return res.status(500).json({ ok: false, msg: "error" })

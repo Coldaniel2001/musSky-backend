@@ -3,7 +3,7 @@ const app = express()
 
 const router = express.Router()
 
-const { getAllTracks, addToLike } = require("../controllers/tracksControllers")
+const { getAllTracks, addToLike, uploadSongImage } = require("../controllers/tracksControllers")
 
 const { getError } = require("../middlewares/error.middleware")
 app.use(getError)
@@ -13,6 +13,8 @@ const { jwtCheck } = require("../middlewares/check-middlewares")
 
 router.get("/", getAllTracks)
 router.put("/addToLike:userId", jwtCheck, getError, addToLike)
+
+
 
 
 
