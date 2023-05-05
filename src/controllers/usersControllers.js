@@ -63,4 +63,14 @@ const editImage = async (req, res) => {
     }
 };
 
-module.exports = { getAllUsers, createUsers, editImage }
+const getUserByEmail = async (req, res) => {
+    const { email } = req.params
+    try {
+        const user = await UserModel.findOne({email})
+        return res.status(200).json({ ok: true, user })
+    } catch (error) {
+        return res.status(500).json({ ok: false, msg: "error" })
+    }
+}
+
+module.exports = { getAllUsers, createUsers, editImage, getUserByEmail }
