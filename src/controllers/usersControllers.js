@@ -92,4 +92,8 @@ const getUserByEmail = async (req, res) => {
     }
 }
 
-module.exports = { getAllUsers, createUsers, editImage, getUserByEmail, getUser }
+const updateUser = async (req,res) => {
+    console.log("here")
+}
+
+module.exports = { getAllUsers, createUsers, editImage, getUserByEmail, getUser, updateUser }
