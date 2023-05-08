@@ -12,6 +12,10 @@ const playlistSchema = Schema({
     song: [{
         type: Schema.Types.ObjectId,
         ref: "Tracks",
+    }],
+    liked: [{
+        type: Schema.Types.ObjectId,
+        ref: "Users",
     }]
     
 })

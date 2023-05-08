@@ -24,7 +24,11 @@ const tracksSchema = Schema({
     genre: {
         type: String,
         required: true
-    }
+    },
+    likedBy : [{
+        type: Schema.Types.ObjectId,
+        ref: "Users",
+    }]
 })
 
 const TracksModel = model("Tracks", tracksSchema)

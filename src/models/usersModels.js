@@ -24,11 +24,7 @@ const userSchema = Schema({
     rol: {
         type: String,
         required: true
-    },
-    liked: [{
-        type: Schema.Types.ObjectId,
-        ref: "Tracks",
-    }]
+    }
 })
 
 const UserModel = model("Users", userSchema)

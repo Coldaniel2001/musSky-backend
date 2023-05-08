@@ -20,7 +20,7 @@ const getUser = async (req, res) => {
 }
 
 const createUsers = async (req, res) => {
-    const { name, nickname, picture, updated_at, email, rol, liked } = req.body
+    const { name, nickname, picture, updated_at, email, rol } = req.body
     try {
         const user = await UserModel.findOne({ email: email })
         if (user) {
@@ -32,8 +32,7 @@ const createUsers = async (req, res) => {
             email,
             picture,
             updated_at,
-            rol,
-            liked
+            rol
         })
         return res.status(200).send({ status: 'OK', createUsers })
 
