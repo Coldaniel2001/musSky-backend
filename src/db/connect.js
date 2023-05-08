@@ -1,12 +1,12 @@
-const moongose = require('mongoose')
+const mongoose = require('mongoose')
 
 const config = require('../config/config')
 
 
-moongose.set('strictQuery', false)
+mongoose.set('strictQuery', false)
 
 function connect() {
-    return moongose.connect(config.db.URL, {
+    return mongoose.connect(config.db.URL, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })

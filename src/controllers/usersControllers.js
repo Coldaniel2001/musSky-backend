@@ -1,4 +1,7 @@
 const UserModel = require("../models/usersModels")
+const { uploadImage, deleteImage } =require("../cloudinary/cloudinary")
+const fs =require("fs-extra")
+
 
 const getAllUsers = async (req, res) => {
     try {
@@ -41,5 +44,52 @@ const createUsers = async (req, res) => {
     }
 }
 
+const editImage = async (req, res) => {
+    const { userId } = req.body;
+    console.log(userId)
+    try {
+        const user = await UserModel.findOne({ _id: userId });
+        console.log(user)
+        const resultToUpload = await uploadImage(req.files.file.tempFilePath);
+        console.log(resultToUpload)
+        // const { public_id, secure_url } = resultToUpload;
+        const { secure_url } = resultToUpload;
+        // console.log(public_id)
+        // const imgToDelete = user.img.public_id;
 
-module.exports = { getAllUsers, createUsers, getUser }
+        user.picture = secure_url
+        // user.img.public_id = public_id;
+        // user.img.secure_url = secure_url;
+
+        // if (imgToDelete) {
+        //     await deleteImage(imgToDelete);
+        // }
+
+        await user.save();
+
+        await fs.unlink(req.files.file.tempFilePath);
+
+        return res.status(200).json({
+            ok: true,
+            img: secure_url,
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(503).json({
+            ok: false,
+            msg: "Something happened",
+        });
+    }
+};
+
+const getUserByEmail = async (req, res) => {
+    const { email } = req.params
+    try {
+        const user = await UserModel.findOne({email:email})
+        return res.status(200).json({ ok: true, user })
+    } catch (error) {
+        return res.status(500).json({ ok: false, msg: "error" })
+    }
+}
+
+module.exports = { getAllUsers, createUsers, editImage, getUserByEmail, getUser }

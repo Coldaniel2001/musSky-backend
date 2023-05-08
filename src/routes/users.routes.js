@@ -3,7 +3,7 @@ const app = express()
 
 const router = express.Router()
 
-const {getAllUsers, createUsers, getUser} = require("../controllers/usersControllers")
+const {getAllUsers, createUsers, getUser, editImage, getUserByEmail} = require("../controllers/usersControllers")
 
 const {getError} = require("../middlewares/error.middleware")
 
@@ -13,6 +13,7 @@ const {jwtCheck} = require("../middlewares/check-middlewares")
 router.get("/", getAllUsers)
 router.get("/:userId", getUser)
 router.post("/",createUsers)
-
+router.post("/image", editImage)
+router.get("/getuser/:email", getUserByEmail)
 
 module.exports = router;

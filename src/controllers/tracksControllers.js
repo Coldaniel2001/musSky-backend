@@ -1,4 +1,6 @@
 const TracksModel = require("../models/tracksModels")
+// const { uploadImage, deleteImage } =require("../cloudinary/cloudinary")
+// const fs =require("fs-extra")
 
 
 const getAllTracks = async (req, res) => {
@@ -9,8 +11,6 @@ const getAllTracks = async (req, res) => {
         res.status(500).send({ status: 'FALSE' })
     }
 }
-
-
 
 
 const addToLike = async (req, res) => {
@@ -48,5 +48,12 @@ const addToLike = async (req, res) => {
     }
 }
 
+
+
+// const uploadSongImage = async (req, res) => {
+    
+    
+
+// };
 
 module.exports = { getAllTracks, addToLike }
