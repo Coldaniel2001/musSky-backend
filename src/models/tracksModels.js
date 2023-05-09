@@ -28,6 +28,7 @@ const tracksSchema = Schema({
     likedBy : [{
         type: Schema.Types.ObjectId,
         ref: "Users",
+        default: []
     }]
 })
 
