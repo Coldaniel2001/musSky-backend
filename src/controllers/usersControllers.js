@@ -37,7 +37,7 @@ const createUsers = async (req, res) => {
             updated_at,
             rol
         })
-        return res.status(200).send({ status: 'OK', createUsers })
+        return res.status(200).send({ status: 'OK', newUser})
 
     } catch (error) {
         res.status(500).send({ status: 'FALSE' })
@@ -92,4 +92,8 @@ const getUserByEmail = async (req, res) => {
     }
 }
 
-module.exports = { getAllUsers, createUsers, editImage, getUserByEmail, getUser }
+const updateUser = async (req,res) => {
+    console.log("here")
+}
+
+module.exports = { getAllUsers, createUsers, editImage, getUserByEmail, getUser, updateUser }
