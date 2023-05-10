@@ -2,16 +2,16 @@ const { Schema, model } = require("mongoose")
 
 const artistSchema = Schema({
     artist: {
-        type: Schema.Types.ObjectId,
-        ref: "Users",
+        type: String,
+        required: true
     },
     tracks: [{
-        type: Schema.Types.ObjectId,
-        ref: "Tracks",
+        type: String,
+        required: true
     }]
 
 })
 
-const AlbumModel = model("Artist", artistSchema)
+const ArtistModel = model("Artist", artistSchema)
 
-module.exports = AlbumModel
+module.exports = ArtistModel

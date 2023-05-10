@@ -60,7 +60,7 @@ const uploadSongImage = async (req, res) => {
         const resultUploadPicture = await uploadImage(picture.tempFilePath)
         const newSong = new TracksModel({nameSong, genre, nameArtist, update_at, picture:resultUploadPicture.secure_url, song:resultUploadSong.secure_url})
         await newSong.save()
-        console.log(newSong)
+        // console.log(newSong)
         await fs.unlink(song.tempFilePath);
         await fs.unlink(picture.tempFilePath);
 
