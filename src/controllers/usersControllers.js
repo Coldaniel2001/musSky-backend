@@ -3,6 +3,9 @@ const { uploadImage, deleteImage } =require("../cloudinary/cloudinary")
 const fs =require("fs-extra")
 
 
+
+
+
 const getAllUsers = async (req, res) => {
     try {
         const allUsers = await UserModel.find({})
@@ -13,12 +16,14 @@ const getAllUsers = async (req, res) => {
 }
 
 const getUser = async (req, res) => {
-    const {userId}= req.params
+    const {userId} = req.params
+
     try {
-        const user = await UserModel.findOne({email:userId})
-        res.status(200).send({ status: 'OK', user })
+        const user = await UserModel.findOne({ _id: userId }).exec()
+        console.log(user)
+        res.status(200).send({ ok:true, user })
     } catch (error) {
-        res.status(500).send({ status: 'FALSE' })
+        res.status(500).send({ ok: false, msg: "error" })
     }
 }
 

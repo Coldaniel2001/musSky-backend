@@ -52,14 +52,15 @@ const addToLike = async (req, res) => {
 const uploadSongImage = async (req, res) => {
     const {nameSong, genre, nameArtist, update_at } = req.body
     const {picture, song } = req.files
+    console.log(req.body)
 
 
     try {
         const resultUploadSong = await uploadImage(song.tempFilePath)
         const resultUploadPicture = await uploadImage(picture.tempFilePath)
         const newSong = new TracksModel({nameSong, genre, nameArtist, update_at, picture:resultUploadPicture.secure_url, song:resultUploadSong.secure_url})
-        await newSong.save()
         console.log(newSong)
+        await newSong.save()
         await fs.unlink(song.tempFilePath);
         await fs.unlink(picture.tempFilePath);
 
@@ -67,7 +68,7 @@ const uploadSongImage = async (req, res) => {
     } catch (error) {
         return res.status(503).json({
           ok: false,
-          msg: "Something happened",
+          msg: "Something wrong",
         });
     }
 
