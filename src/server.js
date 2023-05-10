@@ -14,7 +14,9 @@ app.use(cors())
 app.use(express.json())
 app.use(fileUpload({
     useTempFiles : true,
-    tempFileDir : './tmp'
+    tempFileDir : './tmp',
+    limits: { fileSize: 10000000 }, // 10MB max file(s) size
+    abortOnLimit: true
 }));
 
 

@@ -37,7 +37,7 @@ const createUsers = async (req, res) => {
             updated_at,
             rol
         })
-        return res.status(200).send({ status: 'OK', newUser})
+        return res.status(200).send({ status: 'OK', newUser })
 
     } catch (error) {
         res.status(500).send({ status: 'FALSE' })
@@ -46,12 +46,9 @@ const createUsers = async (req, res) => {
 
 const editImage = async (req, res) => {
     const { userId } = req.body;
-    console.log(userId)
     try {
         const user = await UserModel.findOne({ _id: userId });
-        console.log(user)
         const resultToUpload = await uploadImage(req.files.file.tempFilePath);
-        console.log(resultToUpload)
         // const { public_id, secure_url } = resultToUpload;
         const { secure_url } = resultToUpload;
         // console.log(public_id)
