@@ -16,10 +16,18 @@ const uploadImage = async (filePath) => {
   });
 };
 
+const uploadTrack = async (filePath) => {
+  return await cloudinary.uploader.upload(filePath, {
+    resource_type: 'video',
+    folder: "Songs",
+    format: "mp3"
+  });
+}
+
 const deleteImage = async (public_id) => {
   return await cloudinary.uploader.destroy(public_id);
 };
 
 
 
-module.exports = { uploadImage, deleteImage };
+module.exports = { uploadImage, deleteImage, uploadTrack };

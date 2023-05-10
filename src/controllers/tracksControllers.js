@@ -1,6 +1,6 @@
 const TracksModel = require("../models/tracksModels")
 
-const { uploadImage, deleteImage } =require("../cloudinary/cloudinary")
+const { uploadImage, deleteImage, uploadTrack } =require("../cloudinary/cloudinary")
 const fs = require("fs-extra")
 
 
@@ -55,7 +55,7 @@ const uploadSongImage = async (req, res) => {
 
 
     try {
-        const resultUploadSong = await uploadImage(song.tempFilePath)
+        const resultUploadSong = await uploadTrack(song.tempFilePath)
         const resultUploadPicture = await uploadImage(picture.tempFilePath)
         const newSong = new TracksModel({nameSong, genre, nameArtist, update_at, picture:resultUploadPicture.secure_url, song:resultUploadSong.secure_url})
         await newSong.save()
