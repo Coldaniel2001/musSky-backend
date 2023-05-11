@@ -22,6 +22,18 @@ const getUser = async (req, res) => {
     }
 }
 
+const getUserById = async (req, res) => {
+    const {userId} = req.params
+
+    try {
+        const user = await UserModel.findOne({ _id: userId }).exec()
+        console.log(user)
+        res.status(200).send({ ok:true, user })
+    } catch (error) {
+        res.status(500).send({ ok: false, msg: "error" })
+    }
+}
+
 const createUsers = async (req, res) => {
     const { name, nickname, picture, updated_at, email, rol } = req.body
     try {
@@ -93,4 +105,4 @@ const updateUser = async (req,res) => {
     console.log("here")
 }
 
-module.exports = { getAllUsers, createUsers, editImage, getUserByEmail, getUser, updateUser }
+module.exports = { getAllUsers, createUsers, editImage, getUserByEmail, getUser, updateUser, getUserById }
