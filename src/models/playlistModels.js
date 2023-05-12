@@ -9,14 +9,19 @@ const playlistSchema = Schema({
         type: String,
         required: true        
     },
-    song: [{
+    songs: [{
         type: Schema.Types.ObjectId,
         ref: "Tracks",
     }],
-    liked: [{
+    likes: [{
         type: Schema.Types.ObjectId,
         ref: "Users",
-    }]
+    }],
+    private:{
+        type: Boolean,
+        required: true  
+    }
+
     
 })
 
