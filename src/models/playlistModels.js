@@ -22,7 +22,6 @@ const playlistSchema = Schema({
         required: true  
     }
 
-    
 })
 
 const PlaylistModel = model("Playlist", playlistSchema)
