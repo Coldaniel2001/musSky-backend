@@ -21,11 +21,10 @@ const playlistSchema = Schema({
         type: Schema.Types.ObjectId,
         ref: "Users",
     }],
-    private: [{
+    private: {
         type: Boolean,
-        required: true
-    }],
-
+        required: true  
+    }
     
 })
 
