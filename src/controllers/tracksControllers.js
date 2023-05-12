@@ -71,8 +71,6 @@ const uploadSongImage = async (req, res) => {
           msg: "Something happened",
         });
     }
-
-
 }
 
 module.exports = { getAllTracks, addToLike, uploadSongImage }
