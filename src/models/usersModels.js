@@ -5,6 +5,10 @@ const userSchema = Schema({
         type: String,
         required: true
     },
+    surname: {
+        type: String,
+        required: true
+    },
     nickname: {
         type: String,
         required: true

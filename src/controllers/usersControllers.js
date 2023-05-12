@@ -35,14 +35,16 @@ const getUserById = async (req, res) => {
 }
 
 const createUsers = async (req, res) => {
-    const { name, nickname, picture, updated_at, email, rol } = req.body
+    const { name, nickname, surname, picture, updated_at, email, rol } = req.body
     try {
+        console.log(surname)
         const user = await UserModel.findOne({ email: email })
         if (user) {
             return res.status(200).send({ status: 'False', msg: "This User Exist" })
         }
         const newUser = await UserModel.create({
             name,
+            surname,
             nickname,
             email,
             picture,
@@ -102,7 +104,16 @@ const getUserByEmail = async (req, res) => {
 }
 
 const updateUser = async (req,res) => {
-    console.log("here")
+    const { userId, newValue } = req.body;
+    const { name, surname, nickname, rol } = newValue
+    console.log(nickname)
+
+    try {
+        const user = await UserModel.findOneAndUpdate({_id:userId}, {name:name, surname:surname, nickname:nickname, rol:rol} , {new:true})
+        return res.status(200).json({ok:true, user})   
+    } catch (error) {
+        return res.status(303).json({ok: false, msg: "Something happened", error:error})  
+    }
 }
 
 module.exports = { getAllUsers, createUsers, editImage, getUserByEmail, getUser, updateUser, getUserById }
