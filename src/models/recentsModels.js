@@ -6,8 +6,9 @@ const recentSchema = Schema({
         required: true
     },
     tracks: [{
-        type: String,
-        required: true,
+        type: Schema.Types.ObjectId,
+        ref: "Tracks",
+        default: []
     }]
 })
 
