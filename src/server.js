@@ -26,7 +26,9 @@ app.use(fileUpload({
 
 app.use("/users", usersRouters)
 app.use("/tracks", tracksRouters)
+app.use("/tracks", tracksRouters)
+app.use("/recents",recentsRouters )
 app.use("/playlists", playlistsRouters)
-// app.use("/artist", artistsRouters)
+
 
 module.exports=app
