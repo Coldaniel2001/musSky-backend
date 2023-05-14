@@ -9,6 +9,8 @@ const usersRouters = require('./routes/users.routes')
 const tracksRouters = require('./routes/tracks.routes')
 const recentsRouters = require('./routes/recents.routes')
 
+// const artistsRouters = require('./routes/artist.routes')
+const playlistsRouters = require('./routes/playlists.routes')
 
 const app = express()
 
@@ -24,6 +26,7 @@ app.use(fileUpload({
 
 app.use("/users", usersRouters)
 app.use("/tracks", tracksRouters)
-app.use("/recents", recentsRouters)
+app.use("/playlists", playlistsRouters)
+// app.use("/artist", artistsRouters)
 
 module.exports=app
