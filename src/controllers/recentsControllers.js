@@ -26,6 +26,10 @@ const addRecent = async (req, res) => {
                     await getRecent.tracks.push(song)
                     await getRecent.save()
                 }
+            }else{
+                    await getRecent.tracks.pull(song)
+                    await getRecent.tracks.push(song)
+                    await getRecent.save()
             }
 
         res.status(200).send({ status: 'OK',  })
