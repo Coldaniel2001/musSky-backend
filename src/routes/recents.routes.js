@@ -3,14 +3,14 @@ const app = express()
 
 const router = express.Router()
 
-const { addSong } = require("../controllers/artistControllers")
+const { addRecent } = require("../controllers/recentsControllers")
 
 const { getError } = require("../middlewares/error.middleware")
 
-
 const { jwtCheck } = require("../middlewares/check-middlewares")
 
-router.post("/", addSong)
+
+router.post("/:userId", jwtCheck, getError, addRecent)
 
 
 
