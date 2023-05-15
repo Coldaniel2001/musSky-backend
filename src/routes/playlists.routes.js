@@ -3,7 +3,7 @@ const app = express()
 
 const router = express.Router()
 
-const { createPlaylist, getAllPlaylists } = require("../controllers/playlistControllers")
+const { createPlaylist, getAllPlaylists, getPlaylistById } = require("../controllers/playlistControllers")
 
 const { getError } = require("../middlewares/error.middleware")
     
@@ -13,6 +13,7 @@ const { jwtCheck } = require("../middlewares/check-middlewares")
 
 router.post("/newplaylist", createPlaylist)
 router.get("/", getAllPlaylists)
+router.get("/id/:userId", getPlaylistById)
 
 
 
