@@ -35,8 +35,20 @@ const getAllPlaylists = async (req,res) => {
     }
 }
 
+const getPlaylistById = async (req, res) => {
+    const {userId} = req.params
+    console.log("here")
+
+    try {
+        const playlist = await PlaylistModel.findOne({ _id: userId }).exec()
+        console.log(playlist)
+        res.status(200).send({ ok:true, playlist })
+    } catch (error) {
+        res.status(500).send({ ok: false, msg: "everything is wrong" })
+        console.log(error)
+    }
+}
 
 
 
-
-module.exports = { createPlaylist, getAllPlaylists }
+module.exports = { createPlaylist, getAllPlaylists, getPlaylistById }
