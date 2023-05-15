@@ -1,6 +1,10 @@
 const { Schema, model } = require("mongoose")
 
 const playlistSchema = Schema({
+    author: {
+        type: String,
+        required: true        
+    },
     namePlaylist: {
         type: String,
         required: true        
@@ -9,14 +13,18 @@ const playlistSchema = Schema({
         type: String,
         required: true        
     },
-    song: [{
+    songs: [{
         type: Schema.Types.ObjectId,
         ref: "Tracks",
     }],
-    liked: [{
+    liked_by: [{
         type: Schema.Types.ObjectId,
         ref: "Users",
-    }]
+    }],
+    private: {
+        type: Boolean,
+        required: true  
+    }
     
 })
 

@@ -1,6 +1,6 @@
 const TracksModel = require("../models/tracksModels")
 
-const { uploadImage, deleteImage } =require("../cloudinary/cloudinary")
+const { uploadImage, deleteImage, uploadTrack } =require("../cloudinary/cloudinary")
 const fs = require("fs-extra")
 
 
@@ -12,6 +12,7 @@ const getAllTracks = async (req, res) => {
         res.status(500).send({ status: 'FALSE' })
     }
 }
+
 
 
 const addToLike = async (req, res) => {
@@ -56,11 +57,12 @@ const uploadSongImage = async (req, res) => {
 
 
     try {
-        const resultUploadSong = await uploadImage(song.tempFilePath)
+        const resultUploadSong = await uploadTrack(song.tempFilePath)
         const resultUploadPicture = await uploadImage(picture.tempFilePath)
         const newSong = new TracksModel({nameSong, genre, nameArtist, update_at, picture:resultUploadPicture.secure_url, song:resultUploadSong.secure_url})
         console.log(newSong)
         await newSong.save()
+        // console.log(newSong)
         await fs.unlink(song.tempFilePath);
         await fs.unlink(picture.tempFilePath);
 
@@ -71,8 +73,6 @@ const uploadSongImage = async (req, res) => {
           msg: "Something wrong",
         });
     }
-
-
 }
 
 module.exports = { getAllTracks, addToLike, uploadSongImage }
