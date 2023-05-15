@@ -37,7 +37,7 @@ const getUserById = async (req, res) => {
 const createUsers = async (req, res) => {
     const { name, nickname, surname, picture, updated_at, email, rol } = req.body
     try {
-        console.log(surname)
+
         const user = await UserModel.findOne({ email: email })
         if (user) {
             return res.status(200).send({ status: 'False', msg: "This User Exist" })
