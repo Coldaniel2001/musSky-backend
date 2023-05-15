@@ -13,6 +13,17 @@ const getAllTracks = async (req, res) => {
     }
 }
 
+const deleteTracks = async (req, res) => {
+    const {trackId} = req.params
+    
+    try {
+        const deleteTracks = await TracksModel.findByIdAndDelete(trackId)
+        res.status(200).send({ status: 'OK', deleteTracks })
+    } catch (error) {
+        res.status(500).send({ status: 'FALSE' })
+    }
+}
+
 
 
 const addToLike = async (req, res) => {
@@ -73,4 +84,4 @@ const uploadSongImage = async (req, res) => {
     }
 }
 
-module.exports = { getAllTracks, addToLike, uploadSongImage }
+module.exports = { getAllTracks, addToLike, uploadSongImage, deleteTracks}
