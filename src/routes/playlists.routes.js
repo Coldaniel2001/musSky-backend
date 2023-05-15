@@ -13,7 +13,7 @@ const { jwtCheck } = require("../middlewares/check-middlewares")
 
 router.post("/newplaylist", createPlaylist)
 router.get("/", getAllPlaylists)
-router.get("/", getAllPlaylists)
+router.get("/id/:userId", getPlaylistById)
 
 
 

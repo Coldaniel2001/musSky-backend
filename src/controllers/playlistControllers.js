@@ -40,7 +40,7 @@ const getPlaylistById = async (req, res) => {
     console.log("here")
 
     try {
-        const playlist = await PlaylistModel.findOne({ _id: userId }).exec()
+        const playlist = await PlaylistModel.findOne({ _id: userId }).populate("songs")
         console.log(playlist)
         res.status(200).send({ ok:true, playlist })
     } catch (error) {
