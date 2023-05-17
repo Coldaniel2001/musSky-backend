@@ -8,6 +8,8 @@ const fileUpload = require('express-fileupload')
 const usersRouters = require('./routes/users.routes')
 const tracksRouters = require('./routes/tracks.routes')
 const recentsRouters = require('./routes/recents.routes')
+const searchRouters = require('./routes/search.routes')
+
 
 // const artistsRouters = require('./routes/artist.routes')
 const playlistsRouters = require('./routes/playlists.routes')
@@ -29,6 +31,7 @@ app.use("/tracks", tracksRouters)
 app.use("/tracks", tracksRouters)
 app.use("/recents",recentsRouters )
 app.use("/playlists", playlistsRouters)
+app.use("/search", searchRouters)
 
 
 module.exports=app
