@@ -49,6 +49,20 @@ const getPlaylistById = async (req, res) => {
     }
 }
 
+const addSongInPlaylist = async (req, res) => {
+    const {song, playlist} = req.body
+
+    try {
+        const getPlaylist = await PlaylistModel.findById(playlist._id)
+        getPlaylist.songs.push(song)
+        getPlaylist.save()
+        res.status(200).send({ ok:true, getPlaylist })
+    } catch (error) {
+        res.status(500).send({ ok: false, msg: "everything is wrong" })
+        console.log(error)
+    }
+}
 
 
-module.exports = { createPlaylist, getAllPlaylists, getPlaylistById }
+
+module.exports = { createPlaylist, getAllPlaylists, getPlaylistById, addSongInPlaylist }
