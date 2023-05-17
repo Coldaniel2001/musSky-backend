@@ -105,15 +105,28 @@ const getUserByEmail = async (req, res) => {
 
 const updateUser = async (req,res) => {
     const { userId, newValue } = req.body;
-    const { name, surname, nickname, rol } = newValue
-    console.log(nickname)
+    const { name, surname, nickname, rol, email } = newValue
+    console.log(rol)
 
     try {
-        const user = await UserModel.findOneAndUpdate({_id:userId}, {name:name, surname:surname, nickname:nickname, rol:rol} , {new:true})
+        const user = await UserModel.findOneAndUpdate({_id:userId}, {name:name, surname:surname, nickname:nickname, rol:rol, email: email} , {new:true})
         return res.status(200).json({ok:true, user})   
     } catch (error) {
+        console.log(error)
         return res.status(303).json({ok: false, msg: "Something happened", error:error})  
     }
 }
 
-module.exports = { getAllUsers, createUsers, editImage, getUserByEmail, getUser, updateUser, getUserById }
+const deleteUser = async (req, res) => {
+    console.log("here")
+    console.log(req.params)
+    try {
+        const deleteUser = await UserModel.findById(req.params.id).exec()
+        await UserModel.deleteOne(deleteUser)
+        return res.status(200).json({ok:true, deleteUser})
+    } catch (error) {
+        return res.status(303).json({ok: false, msg: "Something happened", error:error}) 
+    }
+}
+
+module.exports = { getAllUsers, createUsers, editImage, getUserByEmail, getUser, updateUser, getUserById, deleteUser }

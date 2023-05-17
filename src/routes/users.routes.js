@@ -3,7 +3,7 @@ const app = express()
 
 const router = express.Router()
 
-const {getAllUsers, createUsers, getUser, editImage, getUserByEmail, updateUser, getUserById} = require("../controllers/usersControllers")
+const {getAllUsers, createUsers, getUser, editImage, getUserByEmail, updateUser, getUserById, deleteUser} = require("../controllers/usersControllers")
 
 const {getError} = require("../middlewares/error.middleware")
 
@@ -17,6 +17,7 @@ router.post("/",createUsers)
 router.post("/image", editImage)
 router.get("/getuser/:email", getUserByEmail)
 router.patch("/update-user", updateUser)
+router.delete("/delete-user/:id", deleteUser)
 
 
 module.exports = router;
