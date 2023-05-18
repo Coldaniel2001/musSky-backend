@@ -63,6 +63,48 @@ const addSongInPlaylist = async (req, res) => {
     }
 }
 
+const addPlaylist = async (req, res) => {
+    const { playlist, userEmail} = req.body
+
+    try {
+    //     const getPlaylist = await PlaylistModel.findById(playlist._id).populate("songs")
+    //  console.log(getPlaylist)
+            // await getPlaylist.liked_by.pull(userEmail)
+            // await getPlaylist.save()
+   
+      
+
+    
+        const updateLikePlayList = await PlaylistModel.findByIdAndUpdate(
+            playlist._id,
+            [
+                {
+                    $set: {
+                        liked_by: {
+                            $cond: {
+                                if: { $in: [userEmail, '$liked_by'] },
+                                then: { $setDifference: ['$liked_by', [userEmail]] },
+                                else: { $concatArrays: ['$liked_by', [userEmail]] },
+                            },
+                        },
+                    },
+                },
+            ],
+            {
+                new: true
+            },
+            {
+                upsert: true
+            },
+        ).populate("songs")
+        res.status(200).send({ ok:true, updateLikePlayList })
+    } catch (error) {
+        res.status(500).send({ ok: false, msg: "everything is wrong" })
+        console.log(error)
+    }
+}
 
 
-module.exports = { createPlaylist, getAllPlaylists, getPlaylistById, addSongInPlaylist }
+
+
+module.exports = { createPlaylist, getAllPlaylists, getPlaylistById, addSongInPlaylist,addPlaylist }

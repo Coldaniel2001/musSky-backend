@@ -18,7 +18,7 @@ const playlistSchema = Schema({
         ref: "Tracks",
     }],
     liked_by: [{
-        type: Schema.Types.ObjectId,
+        type: String,
         ref: "Users",
     }],
     private: {
