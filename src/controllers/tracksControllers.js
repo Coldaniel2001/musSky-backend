@@ -84,4 +84,18 @@ const uploadSongImage = async (req, res) => {
     }
 }
 
-module.exports = { getAllTracks, addToLike, uploadSongImage, deleteTracks}
+const updateTracks = async (req,res) => {
+    const { userId, newValue } = req.body;
+    const { nameSong } = newValue
+    console.log(userId)
+
+    try {
+        const songChanged = await TracksModel.findOneAndUpdate({_id:userId}, {nameSong:nameSong} , {new:true})
+        return res.status(200).json({ok:true, songChanged})   
+    } catch (error) {
+        console.log(error)
+        return res.status(303).json({ok: false, msg: "Something happened", error:error})  
+    }
+}
+
+module.exports = { getAllTracks, addToLike, uploadSongImage, deleteTracks, updateTracks}
