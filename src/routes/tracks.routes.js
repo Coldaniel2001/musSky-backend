@@ -3,7 +3,7 @@ const app = express()
 
 const router = express.Router()
 
-const { getAllTracks, addToLike, uploadSongImage, deleteTracks } = require("../controllers/tracksControllers")
+const { getAllTracks, addToLike, uploadSongImage, deleteTracks, updateTracks } = require("../controllers/tracksControllers")
 
 const { getError } = require("../middlewares/error.middleware")
 
@@ -15,6 +15,7 @@ router.get("/", getAllTracks)
 router.delete("/:trackId", deleteTracks)
 router.put("/addToLike:userId", jwtCheck, getError, addToLike)
 router.post("/imagesong", uploadSongImage)
+router.patch("/update-track", updateTracks)
 
 
 
